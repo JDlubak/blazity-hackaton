@@ -20,11 +20,16 @@ On macOS/Linux use `source venv/bin/activate` and `cp .env.example .env`.
 
 ## Modes
 
-- **Stub (default, `USE_STUB=1`):** `POST /api/analyze` returns the frozen example
-  response from `../shared/contract.example.json`. No API key required — lets F1
-  integrate immediately.
-- **Live (`USE_STUB=0`):** delegates to B2's `analyze_post`. Requires
-  `backend/analysis/` to exist and `ANTHROPIC_API_KEY` to be set.
+`USE_STUB` is auto-detected when unset:
+
+- **Live (default once `backend/analysis/` exists):** delegates to B2's
+  `analyze_post`. Requires `ANTHROPIC_API_KEY` to be set.
+- **Stub (auto fallback before B2 lands, or forced with `USE_STUB=1`):**
+  `POST /api/analyze` returns the frozen example response from
+  `../shared/contract.example.json`. No API key required — lets F1 integrate
+  immediately.
+
+Force either mode with `USE_STUB=1` (always stub) or `USE_STUB=0` (always live).
 
 ## API
 

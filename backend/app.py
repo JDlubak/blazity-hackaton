@@ -9,6 +9,7 @@ frontend (F1) can integrate on day one. Phase 2 flips USE_STUB off (or simply
 removes the fallback) once B2's `backend/analysis/` package is in place.
 """
 
+import importlib.util
 import json
 import os
 
@@ -29,9 +30,21 @@ with open(_CONTRACT_PATH, encoding="utf-8") as fh:
 VALID_PLATFORMS = set(_CONTRACT["_enums"]["platform"])
 _STUB_RESPONSE = _CONTRACT["response"]
 
-# Flip to False in Phase 2 once backend/analysis/ exists. Kept as a stub by
-# default so `python app.py` works before B2's package lands.
-USE_STUB = os.getenv("USE_STUB", "1") == "1"
+def _resolve_stub_mode() -> bool:
+    """Decide whether to return the frozen stub or call B2's real analysis.
+
+    Explicit USE_STUB env wins (1 = stub, 0 = live) for offline / no-key dev.
+    With no override we run LIVE whenever B2's `analysis` package is importable,
+    and only fall back to the stub if it isn't there yet — so B1 is connected to
+    B2 by default, but `python app.py` still boots before B2's package lands.
+    """
+    override = os.getenv("USE_STUB")
+    if override is not None:
+        return override == "1"
+    return importlib.util.find_spec("analysis") is None
+
+
+USE_STUB = _resolve_stub_mode()
 
 
 # --- The seam to B2 --------------------------------------------------------
