@@ -84,8 +84,11 @@ File ownership is disjoint (below), so branches merge cleanly.
 
 ## Branching & run
 
-- Branch per agent off the plan commit: `backend-api` (B1), `backend-ai` (B2),
-  `frontend` (F1). Disjoint files → clean merges to `main` at integration.
+- **Work directly on `main`.** File ownership is disjoint (B1 → `backend/app.py`
+  + `requirements.txt`, B2 → `backend/analysis/`, F1 → `frontend/`), so conflicts
+  are near-zero; and agents sharing one working directory share one HEAD anyway.
+  Commit your own area with a clear message. If pushing to a shared remote,
+  `git pull --rebase` before pushing (rebases stay clean since paths don't overlap).
 - **Backend:** `cd backend && python -m venv venv && venv\Scripts\activate &&
   pip install -r requirements.txt && python app.py` → http://localhost:5000
 - **Frontend:** `cd frontend && npm install && npm run dev` → http://localhost:5173
