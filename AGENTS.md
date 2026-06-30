@@ -6,9 +6,9 @@
 goal is a **web app that uses AI to solve a real content-management pain**
 (reformatting, brand/tone consistency, asset search, summarization, etc.). Today
 the repo is still a scaffold: only README, LICENSE, and the Atlas AI workspace
-under `.ai/` exist; no application code yet. Stack is Python + Anthropic Claude;
-the concrete use case and web framework are still open. See `.ai/memory/` for
-stable context.
+under `.ai/` exist; no application code yet. Stack is a Flask (Python) JSON API +
+React/Vite frontend with Anthropic Claude; the concrete use case is still open.
+See `.ai/memory/` for stable context.
 
 ## Structure
 
@@ -19,14 +19,14 @@ stable context.
 
 ## Working rules
 
-- Language is **Python**; AI provider is **Anthropic Claude** via the `anthropic`
-  SDK (default to the latest Claude models). The web framework (FastAPI vs
-  Streamlit) is **not yet locked** — confirm before assuming, and update
-  `.ai/memory/stack.md` once decided.
+- Stack: **Flask** (Python 3.12) JSON API backend + **React/Vite** frontend; AI
+  via **Anthropic Claude** (`anthropic` SDK, latest models). The backend owns all
+  Claude calls and the API key. Python deps via **pip + venv**; frontend via
+  **npm**. Details in `.ai/memory/stack.md`.
 - The Anthropic key lives in `.env` as `ANTHROPIC_API_KEY` (gitignored — never
-  commit it or print its value).
-- No build/test/run commands exist yet. Atlas health check is the only safe
-  command: `npx --yes @blazity-atlas/core@latest doctor`.
+  commit it or print its value) and must stay server-side, never in the browser.
+- No build/test/run commands exist yet (nothing scaffolded). Atlas health check
+  is the only safe command: `npx --yes @blazity-atlas/core@latest doctor`.
 - Windows: the `.claude/.cursor/.agents` `skills` symlinks need Administrator or
   Developer Mode to create (see `.ai/memory/lessons.md`).
 - Do not edit the `<!-- BEGIN/END ATLAS -->` managed block below by hand.
