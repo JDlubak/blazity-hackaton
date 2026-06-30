@@ -12,6 +12,13 @@ records the intended shape (see `stack.md` for concrete tech).
 - Frontend ↔ backend over HTTP/JSON. In dev, Vite proxies API calls to the Flask
   server; use `flask-cors` if cross-origin requests are needed.
 
+## Planned API (MVP)
+
+- `POST /analyze` — body: `{ draft, platform, context? }`. The backend sends a
+  single structured Claude call and returns one JSON readiness report:
+  `{ risks[], fit{ verdict, dimensions[] }, rewrite }`. See `product.md` for what
+  each part means. Stateless; no storage.
+
 ## Current layout
 
 - `.ai/` — Atlas AI workspace (config, memory, vocabulary, plans, research,

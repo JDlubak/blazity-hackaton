@@ -1,0 +1,64 @@
+{
+  "_comment": "FROZEN API CONTRACT for POST /api/analyze. Single source of truth for all three agents. Request shape under 'request', success response under 'response'. Enums listed under '_enums'. Do not change shape without updating all three agents.",
+  "_enums": {
+    "platform": ["linkedin", "x", "facebook", "instagram"],
+    "risk.category": [
+      "hate_discrimination",
+      "sensitive_politics_religion",
+      "profanity",
+      "unverifiable_claim",
+      "legal_compliance",
+      "brand_safety"
+    ],
+    "risk.severity": ["low", "medium", "high"],
+    "fit.verdict": ["ready", "needs_work", "risky"],
+    "fit.dimensions[].key": ["length", "tone", "hook", "hashtags_emoji", "cta", "readability"]
+  },
+  "request": {
+    "draft": "Just shipped our new AI tool. It's literally the best thing ever and will 10x your output overnight, guaranteed. DM me.",
+    "platform": "linkedin",
+    "context": {
+      "audience": "B2B SaaS founders",
+      "goal": "drive demo signups",
+      "brandTone": "confident but credible"
+    }
+  },
+  "response": {
+    "platform": "linkedin",
+    "risks": [
+      {
+        "span": "10x your output overnight, guaranteed",
+        "category": "unverifiable_claim",
+        "severity": "high",
+        "reason": "Absolute performance guarantee with no evidence; reads as misleading and erodes credibility.",
+        "suggestion": "Soften to a realistic, evidence-backed claim, e.g. 'helped teams cut drafting time by ~40%'."
+      },
+      {
+        "span": "literally the best thing ever",
+        "category": "brand_safety",
+        "severity": "medium",
+        "reason": "Hyperbole undercuts a credible B2B tone.",
+        "suggestion": "Replace with a specific, concrete differentiator."
+      }
+    ],
+    "fit": {
+      "verdict": "needs_work",
+      "overallScore": 54,
+      "dimensions": [
+        { "key": "length", "label": "Length & format", "score": 40, "comment": "Too short for LinkedIn; no structure or line breaks.", "suggestion": "Expand to 3-5 short paragraphs with a clear takeaway." },
+        { "key": "tone", "label": "Tone", "score": 50, "comment": "Hype-heavy, low credibility for a B2B audience.", "suggestion": "Lead with a concrete result or insight." },
+        { "key": "hook", "label": "Hook / opening", "score": 60, "comment": "Opening states the action but gives no reason to keep reading.", "suggestion": "Open with the problem it solves or a surprising stat." },
+        { "key": "hashtags_emoji", "label": "Hashtags & emoji", "score": 55, "comment": "No hashtags; LinkedIn rewards 3-5 relevant ones.", "suggestion": "Add #AI #SaaS and 1-2 niche tags." },
+        { "key": "cta", "label": "Call to action", "score": 65, "comment": "'DM me' is weak and high-friction.", "suggestion": "Use a clearer, lower-friction CTA." },
+        { "key": "readability", "label": "Readability", "score": 55, "comment": "One dense block, hard to skim on mobile.", "suggestion": "Break into short lines." }
+      ]
+    },
+    "rewrite": {
+      "text": "We just shipped our new AI tool — and the early numbers surprised even us.\n\nTeams using it cut their content drafting time by ~40% in the first two weeks.\n\nNo magic, no overnight 10x. Just fewer hours lost to the blank page.\n\nCurious how it'd fit your workflow? Link in the comments. 👇\n\n#AI #SaaS #ContentMarketing",
+      "summary": "Replaced hype and unverifiable guarantees with a concrete result, added structure, a credible CTA, and relevant hashtags for LinkedIn."
+    }
+  },
+  "error_response": {
+    "error": "human-readable message (returned with HTTP 400 for bad input, 500 for analysis failure)"
+  }
+}
