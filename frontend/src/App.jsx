@@ -81,7 +81,7 @@ export default function App() {
       <header className="app-header">
         <div className="header-inner">
           <div className="logo">
-            <span className="logo-icon">✈️</span>
+            <span className="logo-icon">✈</span>
             <span className="logo-text">Post Preflight</span>
           </div>
           <p className="tagline">Is your post ready to publish?</p>
