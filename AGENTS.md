@@ -2,10 +2,13 @@
 
 ## What this repo is
 
-`blazity-hackaton` — an early-stage hackathon project. Today it is a scaffold:
-only README, LICENSE, and the Atlas AI workspace under `.ai/` exist; there is no
-application code yet. The intended product is an AI / agent application; concrete
-scope and tech stack are not yet decided. See `.ai/memory/` for stable context.
+`blazity-hackaton` — a Blazity Hackathon entry, theme **"AI for Content."** The
+goal is a **web app that uses AI to solve a real content-management pain**
+(reformatting, brand/tone consistency, asset search, summarization, etc.). Today
+the repo is still a scaffold: only README, LICENSE, and the Atlas AI workspace
+under `.ai/` exist; no application code yet. Stack is Python + Anthropic Claude;
+the concrete use case and web framework are still open. See `.ai/memory/` for
+stable context.
 
 ## Structure
 
@@ -16,10 +19,16 @@ scope and tech stack are not yet decided. See `.ai/memory/` for stable context.
 
 ## Working rules
 
-- No stack is chosen yet — confirm language, framework, and run/test/build
-  commands before assuming them. Update `.ai/memory/stack.md` once decided.
-- There are no project-specific safe commands yet beyond Atlas tooling:
-  `npx --yes @blazity-atlas/core@latest doctor` checks workspace health.
+- Language is **Python**; AI provider is **Anthropic Claude** via the `anthropic`
+  SDK (default to the latest Claude models). The web framework (FastAPI vs
+  Streamlit) is **not yet locked** — confirm before assuming, and update
+  `.ai/memory/stack.md` once decided.
+- The Anthropic key lives in `.env` as `ANTHROPIC_API_KEY` (gitignored — never
+  commit it or print its value).
+- No build/test/run commands exist yet. Atlas health check is the only safe
+  command: `npx --yes @blazity-atlas/core@latest doctor`.
+- Windows: the `.claude/.cursor/.agents` `skills` symlinks need Administrator or
+  Developer Mode to create (see `.ai/memory/lessons.md`).
 - Do not edit the `<!-- BEGIN/END ATLAS -->` managed block below by hand.
 - Keep durable docs depersonalized (see Atlas Documentation Rules below).
 

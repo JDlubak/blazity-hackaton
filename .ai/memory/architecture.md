@@ -1,7 +1,8 @@
 # Architecture
 
-No application architecture exists yet. The repository contains only project
-metadata (README, LICENSE) and the Atlas AI workspace under `.ai/`.
+Still a scaffold — no application code yet. The planned form factor is a Python
+web app that calls Anthropic Claude; the web framework is not yet chosen (see
+`stack.md`).
 
 ## Current layout
 
@@ -13,6 +14,6 @@ metadata (README, LICENSE) and the Atlas AI workspace under `.ai/`.
 
 ## Unknowns (fill once code lands)
 
-- Runtime and deployment model
-- Service/module boundaries
-- Architectural invariants and constraints
+- Web framework (FastAPI vs Streamlit) and the request/response model.
+- Module boundaries (UI, Claude calls, content/asset storage).
+- Where content and assets live and how they are ingested and processed.

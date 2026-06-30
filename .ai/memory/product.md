@@ -1,15 +1,25 @@
 # Product
 
-Early-stage hackathon project. The repository is currently a scaffold with no
-application code yet.
+Blazity Hackathon entry — theme **"AI for Content."** The goal is to ship a web
+app that uses AI to solve a real content-management pain. "Content" is broad:
+posts, copy, docs, social, newsletters, subtitles, asset libraries. Typical pains
+in scope: reformatting, brand/tone consistency, asset hunting, keeping tone
+consistent, summarization.
 
-## Direction
+## What matters for the demo
 
-The intended product is an AI / agent application. Specific scope — the concrete
-use case, target users, and feature set — is not yet decided.
+Judged on thinking, not volume: a small tool that does one thing well, is
+explainable, and is demoable beats a sprawling one. The work should show the AI
+was aimed at the right problem, its output was checked, and scope was a
+deliberate choice (build vs skip).
 
-## Unknowns (fill once code lands)
+## Decided
 
-- Concrete product purpose and the problem it solves
-- Target users
-- Success criteria / what a hackathon demo must show
+- Form factor: web app.
+- AI provider: Anthropic Claude (see `stack.md`).
+
+## Unknowns (fill once decided)
+
+- Concrete use case — the specific content pain being solved.
+- Target users.
+- Minimum demo scope: the one thing the tool must do well.
